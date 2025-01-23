@@ -1,0 +1,4 @@
+# Poweroff Computer CLI
+Stop-Computer -Force
+
+
