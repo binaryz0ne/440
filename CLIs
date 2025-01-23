@@ -1,4 +1,15 @@
-# Poweroff Computer CLI
+# Poweroff Computer - PowerShell
 Stop-Computer -Force
 
+# Or using Command Prompt
+shutdown /s
+
+# Delete all logs
+for /F "tokens=*" %1 in ('wevtutil.exe el') DO wevtutil.exe cl "%1"
+
+# Create a Simple Scheduled Task
+schtasks /create /sc minute /tn "Notepad1" /tr notepad.exe
+
+# Run cmd with SYSTEM
+psexec64.exe -d -s -i cmd.exe
 
