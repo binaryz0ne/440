@@ -13,3 +13,9 @@ schtasks /create /sc minute /tn "Notepad1" /tr notepad.exe
 # Run cmd with SYSTEM
 psexec64.exe -d -s -i cmd.exe
 
+# Enable Command Line Auditing
+auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System\Audit" /v ProcessCreationIncludeCmdLine_Enabled /t REG_DWORD /d 1 /f
+auditpol /get /subcategory:"Process Creation"
+reg query "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System\Audit" /v ProcessCreationIncludeCmdLine_Enabled
+Get-WinEvent -LogName Security | Where-Object { $_.Id -eq 4688 } | Select-Object -First 5
