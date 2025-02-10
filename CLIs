@@ -19,3 +19,16 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System\Audit" /
 auditpol /get /subcategory:"Process Creation"
 reg query "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System\Audit" /v ProcessCreationIncludeCmdLine_Enabled
 Get-WinEvent -LogName Security | Where-Object { $_.Id -eq 4688 } | Select-Object -First 5
+
+# Simple Web Server with PHP Support (one-liner)
+# good reference: https://stackoverflow.com/questions/1678010/php-server-on-local-machine
+php -S 0.0.0.0:80 
+
+# Or using Python (one-liner)
+sudo python3 -m http.server 80
+
+# Disabling the Windows SmartScreen can be done using the following command:
+reg.exe ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "Off"
+
+
+
